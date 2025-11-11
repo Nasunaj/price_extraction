@@ -1,0 +1,8 @@
+FROM  ubuntu/python:3.10-22.04_stable
+
+WORKDIR /app
+COPY requirements.txt
+
+RUN pip install --no-cache-dir --prefer-binary -f requirements.txt
+
+CMD ["/bin/bash"]
