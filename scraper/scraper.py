@@ -69,7 +69,7 @@ def url_book_f(url_de_la_page=url_des_pages()[0],url=html_parse()["url"]) :
     url_book=soup_page_ind.select("h3 a")
     list_href_url_book = []
     for link in url_book:
-        list_href_url_book.append(f"{url}/{link.get('href').replace("../..", "catalogue")}")
+        list_href_url_book.append(f"{url}/{link.get('href').replace('../..', 'catalogue')}")
     return list_href_url_book
 
 
