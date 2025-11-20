@@ -120,6 +120,3 @@ dict_book_i = {
     "image_url":f"{url}{image_url_book_i}"
 }
 print(dict_book_i)
-
-
-

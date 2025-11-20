@@ -56,7 +56,7 @@ def pages_categorie_gen(categorie_url):
             url_page = categorie_url
         else:
             url_page = categorie_url.replace("index.html", f"page-{page}.html")
-        soup = execute_safely(html_parse, categorie_url)
+        soup = execute_safely(html_parse, url_page)
         '''
         url_page = categorie_url if page == 1 else categorie_url.replace("index.html", f"page-{page}.html")
         soup = execute_safely(html_parse, url_page)

@@ -32,7 +32,7 @@ def scrap_site(home_url):
                 for page_soup in pages_categorie_gen(categorie_url):
                     for url_book in livres_page_gen(page_soup, categorie_url):
                         book_data = execute_safely(data_book, url_book)
-                        if book_data:
+                        if book_data:#if book_data ok not None write in csv
                             execute_safely(writer.writerow, book_data)
         except Exception as e:
             logging.warning(f"Erreur écriture CSV pour {categorie_name} : {e}")
