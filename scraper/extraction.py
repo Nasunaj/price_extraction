@@ -10,12 +10,6 @@ def html_parse(url="https://books.toscrape.com"):
     page = requests.get(url,timeout=10)
     soup = BeautifulSoup(page.content, "html.parser")
     return soup
-'''
-def html_parse(url):
-    """Télécharge et parse une page HTML."""
-    response = requests.get(url, timeout=10)
-    return BeautifulSoup(response.text, "html.parser")
-'''
 
 
 def categories_gen(home_url):

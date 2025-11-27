@@ -9,9 +9,8 @@ def execute_safely(func, *args):
     - *args: all the arguments into the function
 
     two returns possibilities:
-    - if the error is
-    Returns:
-        Résultat de la fonction si succès, None sinon.
+    - Result of the function if successful
+    - None otherwise
     """
     try:
         return func(*args)

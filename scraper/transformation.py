@@ -2,7 +2,7 @@ import requests
 import os
 from urllib.parse import urljoin
 from .errors import execute_safely
-from .scraper2 import html_parse
+from .extraction import html_parse
 
 def data_book(url_book_i):
     """Retrieves information you want from your book's page."""
@@ -46,24 +46,28 @@ def data_book(url_book_i):
             image_url = urljoin(url_book_i, img_tag["src"])
             # pictures________
             # create folder and extention
+            '''
             folder_path = os.path.join("pictures", category) # folder by category as csv in scrap_site else don't work
             os.makedirs(folder_path, exist_ok=True) # create folder
-            image_filename = os.path.join(folder_path, image_url.split("/")[-1]) #we want the last element name.jpg
+            '''
+            #image_filename = os.path.join(folder_path, image_url.split("/")[-1]) #we want the last element name.jpg
 
             #downlod
             img_response = requests.get(image_url) #sends an HTTP GET request to the image URL. The server responds with: HTTP code (200, 404, 500...) Headers (Content-Type, Content-Length, etc.) the raw content (in this case, the bytes of the image)
             img_response.raise_for_status() #control error if error break
+            ''''
             with open(image_filename, "wb") as f:
                 f.write(img_response.content) #write the content
-
-            print(f"picture ({image_url}) download : {image_filename}")
+            '''
+            #print(f"picture ({image_url}) download : {image_filename}")
         else:
             image_url = ""
-            print(f"picture not found {url_book_i}")
+            #print(f"picture not found {url_book_i}")
+
 
     except Exception:
         image_url = ""
-        print(f"Impossible to download the picture {url_book_i}")
+        #print(f"Impossible to download the picture {url_book_i}")
 
 
     return {
@@ -76,5 +80,6 @@ def data_book(url_book_i):
         "product_description": description,
         "category": category,
         "review_rating": rating,
-        "image_url": image_url
+        "image_url": image_url,
+        "img_response": img_response
     }
