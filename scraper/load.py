@@ -19,7 +19,7 @@ def scrap_site(home_url):
 
 
     for categorie_name, categorie_url in categories_gen(home_url):
-        seen_books = set()  # I don't know why, There was a duplicate problem, so I added set() to don't processed 2 same url. put here for each category.
+        #seen_books = set()  # I don't know why, There was a duplicate problem, so I added set() to don't processed 2 same url. put here for each category.
         filename = os.path.join("files_csv",f"{categorie_name}.csv")
         logging.info(f"Scraping catégorie '{categorie_name}' : {filename}")
 
@@ -38,9 +38,9 @@ def scrap_site(home_url):
 
                 for page_soup in pages_categorie_gen(categorie_url):
                     for url_book in livres_page_gen(page_soup, categorie_url):
-                        if url_book in seen_books:
-                            continue #ignore if already processed
-                        seen_books.add(url_book) #Add as processed
+                        #if url_book in seen_books: # no necessary if put seen_books.add
+                            #continue #ignore if already processed
+                        #seen_books.add(url_book) #Add as processed
 
                         book_data = execute_safely(data_book, url_book)
                         if book_data:#if book_data ok not None write in csv and upload pictures

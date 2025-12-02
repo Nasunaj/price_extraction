@@ -23,10 +23,14 @@ def categories_gen(home_url):
         return
 
     try:
-        book_link=soup.select_one('ul.nav-list > li> a') #without >li>a return list and we need to add [0] ==> soup.select('ul.nav-list li a')[0]
+        '''book_link=soup.select_one('ul.nav-list > li> a') #without >li>a return list and we need to add [0] ==> soup.select('ul.nav-list li a')[0]
         book_url = urljoin(home_url, book_link.get('href'))
         book_name = book_url.rstrip("/").split("/")[-2]
-        yield book_name, book_url
+         yield book_name, book_url'''
+        first_link = soup.select_one('ul.nav-list > li > a')
+        categorie_url = urljoin(home_url, first_link.get('href'))
+        categorie_name = categorie_url.rstrip("/").split("/")[-2]
+        yield categorie_name, categorie_url
     except Exception as e:
         logging.warning(f"URL category book_1 error: {e}")
 
@@ -58,7 +62,7 @@ def pages_categorie_gen(categorie_url):
         if soup is None: # is True exit the while loop
             break
 
-        print(f"  → New page retrieved : {url_page}")
+        print(f" New page retrieved : {url_page}")
         yield soup
 
         try:
@@ -74,7 +78,7 @@ def pages_categorie_gen(categorie_url):
 def livres_page_gen(page_soup, categorie_url):
     """"Generates all the books url.."""
     try:
-        livres_html = page_soup.select("article.product_pod a")
+        livres_html = page_soup.select("article.product_pod h3 a") #why i have duplicate because 2 times the url select only after h3
         for a in livres_html:
             yield urljoin(categorie_url, a['href'])
     except Exception as e:
